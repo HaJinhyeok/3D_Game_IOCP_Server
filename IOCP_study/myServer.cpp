@@ -11,9 +11,7 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
-// ------------------------------
 // Thread-safe queue
-// ------------------------------
 template<typename T>
 class ThreadSafeQueue {
 public:
@@ -37,9 +35,7 @@ private:
     std::condition_variable cond_;
 };
 
-// ------------------------------
 // Structs
-// ------------------------------
 struct OverlappedData {
     WSAOVERLAPPED overlapped;
     WSABUF buffer;
@@ -52,15 +48,11 @@ struct ClientMessage {
     std::vector<char> data;
 };
 
-// ------------------------------
 // Globals
-// ------------------------------
 HANDLE g_hIOCP = NULL;
 ThreadSafeQueue<ClientMessage> g_messageQueue;
 
-// ------------------------------
 // Worker thread
-// ------------------------------
 void WorkerThread() {
     DWORD bytesTransferred;
     ULONG_PTR completionKey;
@@ -97,9 +89,7 @@ void WorkerThread() {
     }
 }
 
-// ------------------------------
 // Message processing thread
-// ------------------------------
 void MessageProcessingThread() {
     while (true) {
         ClientMessage msg = g_messageQueue.Dequeue();
@@ -113,9 +103,7 @@ void MessageProcessingThread() {
     }
 }
 
-// ------------------------------
 // Main server
-// ------------------------------
 int main() {
     WSADATA wsaData;
     WSAStartup(MAKEWORD(2, 2), &wsaData);
