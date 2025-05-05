@@ -51,6 +51,76 @@ struct ClientMessage {
 // Globals
 HANDLE g_hIOCP = NULL;
 ThreadSafeQueue<ClientMessage> g_messageQueue;
+SOCKET waitingPlayer = INVALID_SOCKET;
+SOCKET player1 = INVALID_SOCKET;
+SOCKET player2 = INVALID_SOCKET;
+std::mutex matchMutex;
+
+void CreateMatch(SOCKET client)
+{
+    std::lock_guard<std::mutex> lock(matchMutex);
+
+    if (player1 != INVALID_SOCKET && player2 != INVALID_SOCKET)
+    {
+        const char* fullMsg = "MATCH_FULL";
+        send(client, fullMsg, strlen(fullMsg), 0);
+        return;
+    }
+
+    if (waitingPlayer == INVALID_SOCKET)
+    {
+        waitingPlayer = client;
+        const char* waitMsg = "WAITING...";
+        send(client, waitMsg, strlen(waitMsg),0);
+    }
+    else
+    {
+        player1 = waitingPlayer;
+        player2 = client;
+        waitingPlayer = INVALID_SOCKET;
+
+        const char* matchMsg = "MATCHED";
+        send(player1, matchMsg, strlen(matchMsg), 0);
+        send(player2, matchMsg, strlen(matchMsg), 0);
+
+        printf("Matching Success! %d & %d\n", (int)player1, (int)player2);
+    }
+}
+
+void SendMessageToPlayer(SOCKET sender, const std::vector<char>& msg)
+{
+    std::lock_guard<std::mutex> lock(matchMutex);
+
+    SOCKET receiver = INVALID_SOCKET;
+
+    if (sender == player1)
+    {
+        receiver = player2;
+    }
+    else if (sender == player2)
+    {
+        receiver = player1;
+    }
+
+    if (receiver != INVALID_SOCKET)
+    {
+        send(receiver, msg.data(), msg.size(), 0);
+    }
+}
+
+void OnClientMessage(SOCKET client, const std::vector<char>& msg)
+{
+    std::string str(msg.begin(), msg.end());
+
+    if (str == "MATCH")
+    {
+        CreateMatch(client);
+    }
+    else
+    {
+        SendMessageToPlayer(client, msg);
+    }
+}
 
 // Worker thread
 void WorkerThread() {
@@ -98,8 +168,10 @@ void MessageProcessingThread() {
         std::string str(msg.data.begin(), msg.data.end());
         printf("Received: %s\n", str.c_str());
 
+        OnClientMessage(msg.clientSocket, msg.data);
+
         // 에코 전송
-        send(msg.clientSocket, msg.data.data(), (int)msg.data.size(), 0);
+        //send(msg.clientSocket, msg.data.data(), (int)msg.data.size(), 0);
     }
 }
 

@@ -1,2 +1,7 @@
 ﻿  myServer.cpp
+D:\Unity\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(66,37): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Unity\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(74,37): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Unity\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(83,39): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Unity\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(84,39): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+D:\Unity\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(107,44): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   IOCP_study.vcxproj -> D:\Unity\3D_Game_IOCP_Server\IOCP_study\x64\Debug\IOCP_study.exe
