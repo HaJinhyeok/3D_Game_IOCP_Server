@@ -9,6 +9,8 @@
 #include <queue>
 #include <condition_variable>
 
+#include "myServer.h"
+
 #pragma comment(lib, "ws2_32.lib")
 
 // Thread-safe queue
@@ -56,6 +58,8 @@ SOCKET player1 = INVALID_SOCKET;
 SOCKET player2 = INVALID_SOCKET;
 std::mutex matchMutex;
 
+bool IsMatching = false;
+
 void CreateMatch(SOCKET client)
 {
     std::lock_guard<std::mutex> lock(matchMutex);
@@ -83,6 +87,7 @@ void CreateMatch(SOCKET client)
         send(player1, matchMsg, strlen(matchMsg), 0);
         send(player2, matchMsg, strlen(matchMsg), 0);
 
+        IsMatching = true;
         printf("Matching Success! %d & %d\n", (int)player1, (int)player2);
     }
 }
@@ -118,6 +123,8 @@ void OnClientMessage(SOCKET client, const std::vector<char>& msg)
     }
     else
     {
+
+        // Start(0) ~ Hide(4)는 상대방 클라이언트에게 전달
         SendMessageToPlayer(client, msg);
     }
 }
@@ -138,6 +145,29 @@ void WorkerThread() {
         );
 
         if (!result || bytesTransferred == 0) {
+            if (IsMatching)
+            {
+                const char* msg = "RIVAL_CONNECTION_ERROR";
+                if (player1 == overlapped->clientSocket)
+                {
+                    send(player2, msg, strlen(msg), 0);
+                    waitingPlayer = player2;
+                }
+                else
+                {
+                    send(player1, msg, strlen(msg), 0);
+                    waitingPlayer = player1;
+                }
+                    player1 = INVALID_SOCKET;
+                    player2 = INVALID_SOCKET;
+                    IsMatching = false;
+                    printf("Match Closed...\n");
+            }
+            else
+            {
+                waitingPlayer = INVALID_SOCKET;
+                printf("No Waiting Player...\n");
+            }
             closesocket(overlapped->clientSocket);
             delete overlapped;
             continue;
@@ -190,7 +220,7 @@ int main() {
     bind(listenSock, (SOCKADDR*)&serverAddr, sizeof(serverAddr));
     listen(listenSock, SOMAXCONN);
 
-    printf("IOCP Echo Server running on port 9000...\n");
+    printf("IOCP Server running on port 9000...\n");
 
     g_hIOCP = CreateIoCompletionPort(INVALID_HANDLE_VALUE, NULL, 0, 0);
 
