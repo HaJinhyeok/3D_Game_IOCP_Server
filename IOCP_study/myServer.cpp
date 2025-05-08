@@ -1,3 +1,4 @@
+#pragma warning(disable:4996)
 #define _WINSOCK_DEPRECATED_NO_WARNINGS
 #include <winsock2.h>
 #include <windows.h>
@@ -7,6 +8,7 @@
 #include <thread>
 #include <mutex>
 #include <queue>
+#include <unordered_set>
 #include <condition_variable>
 
 #include "myServer.h"
@@ -56,6 +58,7 @@ ThreadSafeQueue<ClientMessage> g_messageQueue;
 SOCKET waitingPlayer = INVALID_SOCKET;
 SOCKET player1 = INVALID_SOCKET;
 SOCKET player2 = INVALID_SOCKET;
+std::unordered_set<SOCKET> resultPlayers;
 int score1 = NO_SCORE;
 int score2 = NO_SCORE;
 std::mutex matchMutex;
@@ -72,11 +75,16 @@ void CreateMatch(SOCKET client)
 		send(client, fullMsg, strlen(fullMsg), 0);
 		return;
 	}
+	//// 매치 끝나고 결과에 있던 플레이어가 다음 매치 신청한 경우
+	//if (resultPlayers.find(client) != resultPlayers.end())
+	//{
+	//	resultPlayers.erase(client);
+	//}
 
 	if (waitingPlayer == INVALID_SOCKET)
 	{
 		waitingPlayer = client;
-		const char* waitMsg = "WAITING...";
+		const char* waitMsg = "WAITING";
 		send(client, waitMsg, strlen(waitMsg), 0);
 		printf("%d is waiting...\n", (int)client);
 	}
@@ -86,9 +94,10 @@ void CreateMatch(SOCKET client)
 		player2 = client;
 		waitingPlayer = INVALID_SOCKET;
 
-		const char* matchMsg = "MATCHED";
-		send(player1, matchMsg, strlen(matchMsg), 0);
-		send(player2, matchMsg, strlen(matchMsg), 0);
+		const char* msg1 = "MATCHED PLAYER1 PLAYER2";
+		const char* msg2 = "MATCHED PLAYER2 PLAYER1";
+		send(player1, msg1, strlen(msg1), 0);
+		send(player2, msg2, strlen(msg2), 0);
 
 		IsMatching = true;
 		printf("Matching Success! %d & %d\n", (int)player1, (int)player2);
@@ -101,6 +110,7 @@ void SendMessageToPlayer(SOCKET sender, const std::vector<char>& msg)
 
 	SOCKET receiver = INVALID_SOCKET;
 
+	// 플레이어가 나갔을 때 - 게임 종료 or 탈주?
 	if (msg[0] - '0' == (int)DataStatus::ExitMatch)
 	{
 		if (IsMatching)
@@ -181,6 +191,11 @@ void SendMessageToPlayer(SOCKET sender, const std::vector<char>& msg)
 				send(player2, result, sizeof(result), 0);
 				printf("Draw\n");
 			}
+			IsMatching = false;
+			/*resultPlayers.insert(player1);
+			resultPlayers.insert(player2);*/
+			player1 = INVALID_SOCKET;
+			player2 = INVALID_SOCKET;
 			score1 = NO_SCORE;
 			score2 = NO_SCORE;
 		}
