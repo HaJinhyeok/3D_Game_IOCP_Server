@@ -2,11 +2,13 @@
 C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.h(33,13): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   (소스 파일 'myServer.cpp'을(를) 컴파일하는 중)
   
-C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(75,31): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(88,31): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(99,29): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(100,29): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(215,38): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(254,31): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(259,31): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(73,31): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(81,31): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(92,29): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(93,29): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(115,30): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(119,30): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(205,38): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(244,31): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\myServer.cpp(249,31): warning C4267: '인수': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   IOCP_study.vcxproj -> C:\Users\admin\Desktop\hjh\3D_Game_IOCP_Server\IOCP_study\x64\Debug\IOCP_study.exe

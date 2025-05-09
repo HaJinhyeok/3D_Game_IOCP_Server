@@ -8,7 +8,6 @@
 #include <thread>
 #include <mutex>
 #include <queue>
-#include <unordered_set>
 #include <condition_variable>
 
 #include "myServer.h"
@@ -58,7 +57,6 @@ ThreadSafeQueue<ClientMessage> g_messageQueue;
 SOCKET waitingPlayer = INVALID_SOCKET;
 SOCKET player1 = INVALID_SOCKET;
 SOCKET player2 = INVALID_SOCKET;
-std::unordered_set<SOCKET> resultPlayers;
 int score1 = NO_SCORE;
 int score2 = NO_SCORE;
 std::mutex matchMutex;
@@ -76,17 +74,12 @@ void CreateMatch(SOCKET client)
 		return;
 	}
 	//// 매치 끝나고 결과에 있던 플레이어가 다음 매치 신청한 경우
-	//if (resultPlayers.find(client) != resultPlayers.end())
-	//{
-	//	resultPlayers.erase(client);
-	//}
-
 	if (waitingPlayer == INVALID_SOCKET)
 	{
 		waitingPlayer = client;
 		const char* waitMsg = "WAITING";
 		send(client, waitMsg, strlen(waitMsg), 0);
-		printf("%d is waiting...\n", (int)client);
+		printf("%d is Waiting...\n", (int)client);
 	}
 	else
 	{
@@ -113,40 +106,37 @@ void SendMessageToPlayer(SOCKET sender, const std::vector<char>& msg)
 	// 플레이어가 나갔을 때 - 게임 종료 or 탈주?
 	if (msg[0] - '0' == (int)DataStatus::ExitMatch)
 	{
+		// 매치 중에 나간 경우 상대방 승리
 		if (IsMatching)
 		{
+			const char* msg = "RIVAL_CONNECTION_ERROR";
 			if (sender == player1)
 			{
-				waitingPlayer = player2;
-				player2 = INVALID_SOCKET;
-				player1 = INVALID_SOCKET;
+				send(player2, msg, strlen(msg), 0);
 			}
 			else if (sender == player2)
 			{
-				waitingPlayer = player1;
-				player1 = INVALID_SOCKET;
-				player2 = INVALID_SOCKET;
+				send(player1, msg, strlen(msg), 0);
 			}
-			printf("%d leaved...\n", (int)sender);
+			player2 = INVALID_SOCKET;
+			player1 = INVALID_SOCKET;
 			IsMatching = false;
 			// 상대방이 떠났다는 메시지 전송
 		}
 		else
 		{
-			waitingPlayer = INVALID_SOCKET;
-			if (sender == player1)
+			if (waitingPlayer == sender)
 			{
-				player1 = INVALID_SOCKET;
+				waitingPlayer = INVALID_SOCKET;
 			}
-			else if (sender == player2)
-			{
-				player2 = INVALID_SOCKET;
-			}
-			printf("%d leaved...\n", (int)sender);
 		}
+			printf("%d Leaved Game...\n", (int)sender);
+		int close = closesocket(sender);
+		printf("closesocket on ExitMatch message: %d\n", close);
+		//WSAGetLastError();
 		return;
 	}
-	// 게임 종료 시
+	// 매치 종료 시
 	if (msg[0] - '0' == (int)DataStatus::Finish)
 	{
 		std::string str(msg.begin() + 2, msg.end());
@@ -266,10 +256,14 @@ void WorkerThread() {
 			}
 			else
 			{
-				waitingPlayer = INVALID_SOCKET;
-				printf("No Waiting Player...\n");
+				if (waitingPlayer == overlapped->clientSocket)
+				{
+					waitingPlayer = INVALID_SOCKET;
+				}
+				printf("%d Connection Closed...\n", (int)overlapped->clientSocket);
 			}
-			closesocket(overlapped->clientSocket);
+			int close = closesocket(overlapped->clientSocket);
+			printf("closesocket on CONNECTION_CLOSED: %d\n", close);
 			delete overlapped;
 			continue;
 		}
