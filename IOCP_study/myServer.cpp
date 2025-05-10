@@ -19,23 +19,23 @@ template<typename T>
 class ThreadSafeQueue {
 public:
 	void Enqueue(const T& item) {
-		std::unique_lock<std::mutex> lock(mutex_);
-		queue_.push(item);
-		cond_.notify_one();
+		std::unique_lock<std::mutex> lock(safeMutex);
+		safeQueue.push(item);
+		safeCond.notify_one();
 	}
 
 	T Dequeue() {
-		std::unique_lock<std::mutex> lock(mutex_);
-		cond_.wait(lock, [this]() { return !queue_.empty(); });
-		T item = queue_.front();
-		queue_.pop();
+		std::unique_lock<std::mutex> lock(safeMutex);
+		safeCond.wait(lock, [this]() { return !safeQueue.empty(); });
+		T item = safeQueue.front();
+		safeQueue.pop();
 		return item;
 	}
 
 private:
-	std::queue<T> queue_;
-	std::mutex mutex_;
-	std::condition_variable cond_;
+	std::queue<T> safeQueue;
+	std::mutex safeMutex;
+	std::condition_variable safeCond;
 };
 
 // Structs
@@ -103,7 +103,7 @@ void SendMessageToPlayer(SOCKET sender, const std::vector<char>& msg)
 
 	SOCKET receiver = INVALID_SOCKET;
 
-	// 플레이어가 나갔을 때 - 게임 종료 or 탈주?
+	// 플레이어가 나갔을 때 - 게임 종료 or 탈주
 	if (msg[0] - '0' == (int)DataStatus::ExitMatch)
 	{
 		// 매치 중에 나간 경우 상대방 승리
@@ -121,7 +121,6 @@ void SendMessageToPlayer(SOCKET sender, const std::vector<char>& msg)
 			player2 = INVALID_SOCKET;
 			player1 = INVALID_SOCKET;
 			IsMatching = false;
-			// 상대방이 떠났다는 메시지 전송
 		}
 		else
 		{
@@ -182,8 +181,6 @@ void SendMessageToPlayer(SOCKET sender, const std::vector<char>& msg)
 				printf("Draw\n");
 			}
 			IsMatching = false;
-			/*resultPlayers.insert(player1);
-			resultPlayers.insert(player2);*/
 			player1 = INVALID_SOCKET;
 			player2 = INVALID_SOCKET;
 			score1 = NO_SCORE;
@@ -294,9 +291,6 @@ void MessageProcessingThread() {
 		printf("Received: %s\n", str.c_str());
 
 		OnClientMessage(msg.clientSocket, msg.data);
-
-		// 에코 전송
-		//send(msg.clientSocket, msg.data.data(), (int)msg.data.size(), 0);
 	}
 }
 
