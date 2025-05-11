@@ -18,21 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "myServer.h",
-              "DocumentMoniker": "D:\\Unity\\3D_Game_IOCP_Server\\IOCP_study\\myServer.h",
-              "RelativeDocumentMoniker": "myServer.h",
-              "ToolTip": "D:\\Unity\\3D_Game_IOCP_Server\\IOCP_study\\myServer.h",
-              "RelativeToolTip": "myServer.h",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAAAcAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-06T06:55:45.348Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -41,9 +28,22 @@
               "RelativeDocumentMoniker": "myServer.cpp",
               "ToolTip": "D:\\Unity\\3D_Game_IOCP_Server\\IOCP_study\\myServer.cpp",
               "RelativeToolTip": "myServer.cpp",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAADUAAAAKAAAAAAAAAA==",
+              "ViewState": "AgIAAIcAAAAAAAAAAADgv9EAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-04-20T15:32:39.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "myServer.h",
+              "DocumentMoniker": "D:\\Unity\\3D_Game_IOCP_Server\\IOCP_study\\myServer.h",
+              "RelativeDocumentMoniker": "myServer.h",
+              "ToolTip": "D:\\Unity\\3D_Game_IOCP_Server\\IOCP_study\\myServer.h",
+              "RelativeToolTip": "myServer.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-06T06:55:45.348Z",
               "EditorCaption": ""
             }
           ]

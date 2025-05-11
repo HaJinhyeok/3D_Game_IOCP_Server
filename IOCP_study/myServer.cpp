@@ -67,13 +67,15 @@ void CreateMatch(SOCKET client)
 {
 	std::lock_guard<std::mutex> lock(matchMutex);
 
+	// 이미 1대1 매치 진행 중일 경우
 	if (player1 != INVALID_SOCKET && player2 != INVALID_SOCKET)
 	{
 		const char* fullMsg = "MATCH_FULL";
 		send(client, fullMsg, strlen(fullMsg), 0);
+		printf("1:1 Match is already ongoing...\n");
 		return;
 	}
-	//// 매치 끝나고 결과에 있던 플레이어가 다음 매치 신청한 경우
+	// 매치 끝나고 결과에 있던 플레이어가 다음 매치 신청한 경우 or 새로운 플레이어 등록
 	if (waitingPlayer == INVALID_SOCKET)
 	{
 		waitingPlayer = client;
