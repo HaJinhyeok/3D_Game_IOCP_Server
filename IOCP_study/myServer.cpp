@@ -134,7 +134,6 @@ void SendMessageToPlayer(SOCKET sender, const std::vector<char>& msg)
 			printf("%d Leaved Game...\n", (int)sender);
 		int close = closesocket(sender);
 		printf("closesocket on ExitMatch message: %d\n", close);
-		//WSAGetLastError();
 		return;
 	}
 	// 매치 종료 시
