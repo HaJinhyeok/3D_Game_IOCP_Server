@@ -14,44 +14,6 @@
 
 #pragma comment(lib, "ws2_32.lib")
 
-// Thread-safe queue
-template<typename T>
-class ThreadSafeQueue {
-public:
-	void Enqueue(const T& item) {
-		std::unique_lock<std::mutex> lock(safeMutex);
-		safeQueue.push(item);
-		safeCond.notify_one();
-	}
-
-	T Dequeue() {
-		std::unique_lock<std::mutex> lock(safeMutex);
-		safeCond.wait(lock, [this]() { return !safeQueue.empty(); });
-		T item = safeQueue.front();
-		safeQueue.pop();
-		return item;
-	}
-
-private:
-	std::queue<T> safeQueue;
-	std::mutex safeMutex;
-	std::condition_variable safeCond;
-};
-
-// Structs
-struct OverlappedData {
-	WSAOVERLAPPED overlapped;
-	WSABUF buffer;
-	char data[1024];
-	SOCKET clientSocket;
-};
-
-struct ClientMessage {
-	SOCKET clientSocket;
-	std::vector<char> data;
-};
-
-// Globals
 HANDLE g_hIOCP = NULL;
 ThreadSafeQueue<ClientMessage> g_messageQueue;
 SOCKET waitingPlayer = INVALID_SOCKET;
@@ -131,7 +93,7 @@ void SendMessageToPlayer(SOCKET sender, const std::vector<char>& msg)
 				waitingPlayer = INVALID_SOCKET;
 			}
 		}
-			printf("%d Leaved Game...\n", (int)sender);
+		printf("%d Leaved Game...\n", (int)sender);
 		int close = closesocket(sender);
 		printf("closesocket on ExitMatch message: %d\n", close);
 		return;

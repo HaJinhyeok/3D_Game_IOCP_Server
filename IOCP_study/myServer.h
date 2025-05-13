@@ -1,25 +1,41 @@
+#include "Define.h"
+
 #pragma once
-#define NO_SCORE -1
+// Thread-safe queue
+template<typename T>
+class ThreadSafeQueue {
+public:
+	void Enqueue(const T& item) {
+		std::unique_lock<std::mutex> lock(safeMutex);
+		safeQueue.push(item);
+		safeCond.notify_one();
+	}
 
-enum DataStatus : int
-{
-	Start,
-	Swap,
-	Destroy,
-	Generate,
-	Hide,
-	Result,
+	T Dequeue() {
+		std::unique_lock<std::mutex> lock(safeMutex);
+		safeCond.wait(lock, [this]() { return !safeQueue.empty(); });
+		T item = safeQueue.front();
+		safeQueue.pop();
+		return item;
+	}
 
-	Finish,
-	RivalConnectionClosed,
-	ExitMatch,
+private:
+	std::queue<T> safeQueue;
+	std::mutex safeMutex;
+	std::condition_variable safeCond;
 };
 
-enum Result :int
-{
-	Win,
-	Lose,
-	Draw,
+// Structs
+struct OverlappedData {
+	WSAOVERLAPPED overlapped;
+	WSABUF buffer;
+	char data[1024];
+	SOCKET clientSocket;
+};
+
+struct ClientMessage {
+	SOCKET clientSocket;
+	std::vector<char> data;
 };
 
 // string을 점수로 바꿔주기
