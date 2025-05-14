@@ -1,2 +1,2 @@
-# 3D_Game_IOCP_Server
- IOCP 서버 간단 테스트용
+# 2D_3Match_IOCP_Server
+ IOCP 에코 서버 기반 간단한 서버 구현
