@@ -1,8 +1,8 @@
 #pragma once
 #include "ClientSession.h"
 #include "Packet.h"
+#include "function.h"
 #include <memory>
-#define NO_SCORE -1
 
 static std::shared_ptr<ClientSession> waitingPlayer = nullptr;
 static std::shared_ptr<ClientSession> player1 = nullptr;

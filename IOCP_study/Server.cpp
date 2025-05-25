@@ -48,7 +48,7 @@ void Server::WorkerThreadLoop()
 {
 	DWORD bytesTransferred;
 	ULONG_PTR key;
-	OverlappedData* overlapped = new OverlappedData;
+	OverlappedData* overlapped;
 
 	while (true)
 	{
@@ -74,32 +74,51 @@ void Server::WorkerThreadLoop()
 			}
 			else
 			{
-				if (waitingPlayer != nullptr && waitingPlayer->GetSocket() == overlapped->clientSocket)
+				if (waitingPlayer && waitingPlayer->GetSocket() == overlapped->clientSocket)
 				{
 					waitingPlayer = nullptr;
 					std::cout << "No Wating Player...\n";
 				}
 				//std::cout << overlapped->clientSocket << " Disconnected...\n";
 			}
-			int close = closesocket(overlapped->clientSocket);
+			/*int close = closesocket(overlapped->clientSocket);
 			printf("closesocket on CONNECTION_CLOSED: %d\n", close);
+			if (overlapped)
+			{
+				delete overlapped;
+			}*/
+			closesocket(overlapped->clientSocket);
 			delete overlapped;
 			continue;
 		}
 
-		SOCKET sock = (SOCKET)key;
 		auto session = sessions[key];
 		if (!session)
+		{
+			delete overlapped;
 			continue;
+		}
 
-		OnRecv(session, session->GetRecvBuffer(), bytesTransferred);
+		//OnRecv(session, session->GetRecvBuffer(), bytesTransferred);
+		OnRecv(session, overlapped->data, bytesTransferred);
 		session->PostRecv();
+
+		delete overlapped;
 	}
 }
 
 void Server::OnRecv(std::shared_ptr<ClientSession> session, const char* data, int len)
 {
 	PacketProcessor::ProcessPacket(session, data, len);
+	if (len >= sizeof(PacketHeader))
+	{
+		const PacketHeader* header = reinterpret_cast<const PacketHeader*>(data);
+		std::cout << "Recv [" << len << " bytes] from "<<session->GetSocket()<<", PacketType: " << header->type << std::endl;
+	}
+	else
+	{
+		std::cout << "Recv too short to contain header: " << len << "bytes\n";
+	}
 }
 
 void Server::Close()

@@ -4,29 +4,14 @@
 #include <cstring>
 #include <iostream>
 
-
-// string을 점수로 바꿔주기
-// 어짜피 점수니까 그냥 음이 아닌 정수로 가정
-int StringToInt(std::string str)
-{
-	if (str.empty())
-		return NO_SCORE;
-	int result = 0;
-	int mul = 1;
-	for (int i = str.size() - 1; i >= 0; i--)
-	{
-		result += mul * (str[i] - '0');
-		mul *= 10;
-	}
-	return result;
-}
-
 void PacketProcessor::ProcessPacket(std::shared_ptr<ClientSession> session, const char* data, int len)
 {
 	if (len < sizeof(PacketHeader))
 		return;
-	printf("Received: %s\n", data);
 	const PacketHeader* header = reinterpret_cast<const PacketHeader*>(data);
+	// 실제 수신 데이터보다 크면 잘못된 패킷임
+	if (len < header->size)
+		return;
 	if (header->type == PACKET_MATCH_REQUEST)
 	{
 		HandleMatchRequest(session);
@@ -43,14 +28,18 @@ void PacketProcessor::HandleMatchRequest(std::shared_ptr<ClientSession> session)
 	if (player1 && player2)
 	{
 		PacketHeader err = { sizeof(PacketHeader), PACKET_ERR_FULL };
-		session->Send((char*)&err, sizeof(err));
+		session->Send((char*)&err, err.size);
+		std::cout << "Match is already full\n";
+		std::cout << "Player1: " << player1->GetSocket() << '\n';
+		std::cout << "Player2: " << player2->GetSocket() << '\n';
+		closesocket(session->GetSocket());
 		return;
 	}
 	if (!waitingPlayer)
 	{
 		waitingPlayer = session;
 		PacketHeader header = { sizeof(PacketHeader), PACKET_MATCH_WAITING };
-		session->Send((char*)&header, sizeof(header));
+		session->Send((char*)&header, header.size);
 		std::cout << waitingPlayer->GetSocket() << " is Waiting for Opponent...\n";
 	}
 	else
@@ -59,14 +48,40 @@ void PacketProcessor::HandleMatchRequest(std::shared_ptr<ClientSession> session)
 		player2 = session;
 		waitingPlayer = nullptr;
 
-		PacketHeader match = { sizeof(PacketHeader), PACKET_MATCH_START };
+		Packet packetToPlayer1 = {};
+		packetToPlayer1.header.size = sizeof(Packet);
+		packetToPlayer1.header.type = PACKET_MATCH_COMPLETE;
+		strncpy(packetToPlayer1.message, "PLAYER2", sizeof(packetToPlayer1.message) - 1);
+
+		Packet packetToPlayer2 = {};
+		packetToPlayer2.header.size = sizeof(Packet);
+		packetToPlayer2.header.type = PACKET_MATCH_COMPLETE;
+		strncpy(packetToPlayer2.message, "PLAYER1", sizeof(packetToPlayer2.message) - 1);
+
+		player1->Send((char*)&packetToPlayer1, packetToPlayer1.header.size);
+		player2->Send((char*)&packetToPlayer2, packetToPlayer2.header.size);
+
+		/*PacketHeader match = { sizeof(PacketHeader), PACKET_MATCH_COMPLETE };
 		Packet packetToPlayer1 = { match,"PLAYER2" };
 		Packet packetToPlayer2 = { match,"PLAYER1" };
 		player1->Send((char*)&packetToPlayer1, sizeof(packetToPlayer1));
-		player2->Send((char*)&packetToPlayer2, sizeof(packetToPlayer1));
+		player2->Send((char*)&packetToPlayer2, sizeof(packetToPlayer1));*/
+
 		IsMatching = true;
 
 		std::cout << "Players matched!\n";
+	}
+	if (waitingPlayer)
+	{
+		std::cout << "Waiting: " << waitingPlayer->GetSocket() << '\n';
+	}
+	if (player1)
+	{
+		std::cout << "Player1: " << player1->GetSocket() << '\n';
+	}
+	if (player2)
+	{
+		std::cout << "Player2: " << player2->GetSocket() << '\n';
 	}
 }
 
@@ -74,7 +89,12 @@ void PacketProcessor::SendMessageToPlayer(std::shared_ptr<ClientSession> sender,
 {
 	std::shared_ptr<ClientSession> receiver;
 	const PacketHeader* header = reinterpret_cast<const PacketHeader*>(data);
-
+	// Generate 상황 확인용
+	if (header->type == PacketType::PACKET_GENERATE)
+	{
+		std::cout << sender->GetSocket()<<"으로부터 생성 패킷 도착\n";
+		PrintBytes(data, len);
+	}
 	// 플레이어가 나갔을 때 - 게임 종료 or 탈주
 	if (header->type == PacketType::PACKET_MATCH_EXIT)
 	{
@@ -82,33 +102,37 @@ void PacketProcessor::SendMessageToPlayer(std::shared_ptr<ClientSession> sender,
 		if (IsMatching)
 		{
 			const Packet* recvPacket = reinterpret_cast<const Packet*>(data);
-			Packet* sendPacket = new Packet;
+			Packet sendPacket = {};
 
-			sendPacket->header.size = sizeof(Packet);
-			sendPacket->header.type = PACKET_ERR_DISCONNECTION;
-			strcpy(sendPacket->message, recvPacket->message);
+			sendPacket.header.size = sizeof(Packet);
+			sendPacket.header.type = PACKET_ERR_DISCONNECTION;
+			//strcpy(sendPacket.message, recvPacket->message);
 
 			if (sender == player1)
 			{
-				player2->Send((char*)sendPacket, sizeof(sendPacket));
+				player2->Send((char*)&sendPacket, sendPacket.header.size);
 			}
 			else if (sender == player2)
 			{
-				player1->Send((char*)sendPacket, sizeof(sendPacket));
+				player1->Send((char*)&sendPacket, sendPacket.header.size);
 			}
 			player1 = nullptr;
 			player2 = nullptr;
 			IsMatching = false;
-			delete sendPacket;
 		}
 		else
 		{
 			if (waitingPlayer == sender)
 			{
+				Packet sendPacket = {};
+				sendPacket.header.size = sizeof(PacketHeader);
+				sendPacket.header.type = PACKET_MATCH_EXIT;
+				waitingPlayer->Send((char*)&sendPacket, sendPacket.header.size);
+
 				waitingPlayer = nullptr;
 			}
 		}
-		std::cout << sender << " Leaved Game...\n";
+		std::cout << sender->GetSocket() << " Leaved Game...\n";
 		closesocket(sender->GetSocket());
 		return;
 	}
@@ -116,7 +140,7 @@ void PacketProcessor::SendMessageToPlayer(std::shared_ptr<ClientSession> sender,
 	if (header->type == PacketType::PACKET_MATCH_FINISH)
 	{
 		const Packet* pck = reinterpret_cast<const Packet*>(data);
-		int score = StringToInt(std::string(pck->message));
+		int score = StringToInt(BytesToString(pck->message, len - 4));
 		if (sender == player1)
 		{
 			score1 = score;
@@ -132,24 +156,24 @@ void PacketProcessor::SendMessageToPlayer(std::shared_ptr<ClientSession> sender,
 			if (score1 > score2)
 			{
 				result->type = PACKET_RESULT_WIN;
-				player1->Send((char*)result, sizeof(result));
+				player1->Send((char*)result, result->size);
 				result->type = PACKET_RESULT_LOSE;
-				player2->Send((char*)result, sizeof(result));
+				player2->Send((char*)result, result->size);
 				std::cout << "Player1 Win\n";
 			}
 			else if (score2 > score1)
 			{
 				result->type = PACKET_RESULT_WIN;
-				player2->Send((char*)result, sizeof(result));
+				player2->Send((char*)result, result->size);
 				result->type = PACKET_RESULT_LOSE;
-				player1->Send((char*)result, sizeof(result));
+				player1->Send((char*)result, result->size);
 				std::cout << "Player2 Win\n";
 			}
 			else
 			{
 				result->type = PACKET_RESULT_DRAW;
-				player1->Send((char*)result, sizeof(result));
-				player2->Send((char*)result, sizeof(result));
+				player1->Send((char*)result, result->size);
+				player2->Send((char*)result, result->size);
 				std::cout << "Draw\n";
 			}
 			IsMatching = false;

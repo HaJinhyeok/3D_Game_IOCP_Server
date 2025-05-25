@@ -3,6 +3,8 @@
 #include <windows.h>
 #include <memory>
 
+#include "OverlappedData.h"
+
 class ClientSession
 {
 public:
@@ -15,5 +17,5 @@ public:
 private:
 	SOCKET socket;
 	WSAOVERLAPPED overlappedRecv;
-	char recvBuffer[1024];
+	//char recvBuffer[1024];
 };

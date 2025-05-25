@@ -128,17 +128,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ClientSession.cpp" />
+    <ClCompile Include="function.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="myServer.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="PacketProcessor.cpp" />
     <ClCompile Include="Server.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ClientSession.h" />
-    <ClInclude Include="Define.h" />
-    <ClInclude Include="myServer.h" />
+    <ClInclude Include="function.h" />
+    <ClInclude Include="OverlappedData.h" />
     <ClInclude Include="Packet.h" />
     <ClInclude Include="PacketProcessor.h" />
     <ClInclude Include="Server.h" />

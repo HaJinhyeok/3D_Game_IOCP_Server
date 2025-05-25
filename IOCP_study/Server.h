@@ -9,6 +9,13 @@
 #include <thread>
 #include <vector>
 
+extern std::shared_ptr<ClientSession> waitingPlayer;
+extern std::shared_ptr<ClientSession> player1;
+extern std::shared_ptr<ClientSession> player2;
+extern bool IsMatching;
+extern int score1;
+extern int score2;
+
 class Server
 {
 public:

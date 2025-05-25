@@ -4,6 +4,7 @@ enum PacketType : uint16_t
 {
 	PACKET_MATCH_REQUEST = 0,
 	PACKET_MATCH_WAITING,
+	PACKET_MATCH_COMPLETE,
 	PACKET_MATCH_START,
 	PACKET_MATCH_FINISH,
 	PACKET_MATCH_RESULT,
@@ -34,11 +35,4 @@ struct Packet
 {
 	PacketHeader header;
 	char message[512];
-};
-
-struct OverlappedData {
-	WSAOVERLAPPED overlapped;
-	WSABUF buffer;
-	char data[1024];
-	SOCKET clientSocket;
 };
