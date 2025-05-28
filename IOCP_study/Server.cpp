@@ -26,6 +26,7 @@ void Server::Start(unsigned short port)
 	{
 		workerThreads.emplace_back([this]() {WorkerThreadLoop(); });
 	}
+
 	AcceptLoop();
 }
 
@@ -53,55 +54,57 @@ void Server::WorkerThreadLoop()
 	while (true)
 	{
 		BOOL result = GetQueuedCompletionStatus(iocpHandle, &bytesTransferred, &key, (LPOVERLAPPED*)&overlapped, INFINITE);
+		SOCKET sock = overlapped ? overlapped->clientSocket : INVALID_SOCKET;
+		auto session = sessions[key];
+
 		// 소켓 연결 끊어졌을 때
 		if (!result || bytesTransferred <= 0)
 		{
 			if (IsMatching)
 			{
-				PacketHeader err = { sizeof(PacketHeader), PACKET_ERR_DISCONNECTION };
-				if (player1->GetSocket() == overlapped->clientSocket)
+				std::shared_ptr<ClientSession> receiver = nullptr;
+
+				if (player1 && player1->GetSocket() == sock)
 				{
-					player2->Send((char*)&err, sizeof(err));
+					receiver = player2;
 				}
-				else
+				else if (player2 && player2->GetSocket() == sock)
 				{
-					player1->Send((char*)&err, sizeof(err));
+					receiver = player1;
 				}
+				if (receiver)
+				{
+					Packet sendPacket = { };
+					sendPacket.header.size = sizeof(Packet);
+					sendPacket.header.type = PACKET_ERR_DISCONNECTION;
+					receiver->Send((char*)&sendPacket, sizeof(sendPacket));
+				}
+
 				player1 = nullptr;
 				player2 = nullptr;
 				IsMatching = false;
+
 				std::cout << "Match Closed...\n";
 			}
 			else
 			{
-				if (waitingPlayer && waitingPlayer->GetSocket() == overlapped->clientSocket)
+				if (waitingPlayer && waitingPlayer->GetSocket() == sock)
 				{
 					waitingPlayer = nullptr;
 					std::cout << "No Wating Player...\n";
 				}
-				//std::cout << overlapped->clientSocket << " Disconnected...\n";
 			}
-			/*int close = closesocket(overlapped->clientSocket);
-			printf("closesocket on CONNECTION_CLOSED: %d\n", close);
-			if (overlapped)
-			{
-				delete overlapped;
-			}*/
-			closesocket(overlapped->clientSocket);
+
+			closesocket(sock);
 			delete overlapped;
 			continue;
 		}
 
-		auto session = sessions[key];
-		if (!session)
+		if (session)
 		{
-			delete overlapped;
-			continue;
+			OnRecv(session, overlapped->data, bytesTransferred);
+			session->PostRecv();
 		}
-
-		//OnRecv(session, session->GetRecvBuffer(), bytesTransferred);
-		OnRecv(session, overlapped->data, bytesTransferred);
-		session->PostRecv();
 
 		delete overlapped;
 	}
@@ -113,7 +116,7 @@ void Server::OnRecv(std::shared_ptr<ClientSession> session, const char* data, in
 	if (len >= sizeof(PacketHeader))
 	{
 		const PacketHeader* header = reinterpret_cast<const PacketHeader*>(data);
-		std::cout << "Recv [" << len << " bytes] from "<<session->GetSocket()<<", PacketType: " << header->type << std::endl;
+		std::cout << "Recv [" << len << " bytes] from " << session->GetSocket() << ", PacketType: " << header->type << '\n';
 	}
 	else
 	{

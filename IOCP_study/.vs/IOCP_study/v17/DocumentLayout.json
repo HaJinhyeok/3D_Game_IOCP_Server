@@ -3,18 +3,6 @@
   "WorkspaceRootPath": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\PacketProcessor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:PacketProcessor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\PacketProcessor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:PacketProcessor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Packet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:Packet.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:Server.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
@@ -23,28 +11,24 @@
       "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:ClientSession.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\ClientSession.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:ClientSession.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Server.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:Server.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\OverlappedData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:OverlappedData.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Server.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:Server.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\PacketProcessor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:PacketProcessor.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\function.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:function.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\ClientSession.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:ClientSession.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\function.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:function.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\PacketProcessor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{58D990BC-4FFC-462D-AD6C-0F1DDEF04454}|IOCP_study.vcxproj|solutionrelative:PacketProcessor.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,56 +38,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "OverlappedData.h",
-              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\OverlappedData.h",
-              "RelativeDocumentMoniker": "OverlappedData.h",
-              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\OverlappedData.h",
-              "RelativeToolTip": "OverlappedData.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAADwvxEAAAACAAAAAAAAAA==",
+              "Title": "PacketProcessor.h",
+              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\PacketProcessor.h",
+              "RelativeDocumentMoniker": "PacketProcessor.h",
+              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\PacketProcessor.h",
+              "RelativeToolTip": "PacketProcessor.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-25T11:15:59.842Z"
+              "WhenOpened": "2025-05-28T15:36:14.189Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Server.cpp",
               "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Server.cpp",
               "RelativeDocumentMoniker": "Server.cpp",
               "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Server.cpp",
               "RelativeToolTip": "Server.cpp",
-              "ViewState": "AgIAAGAAAAAAAAAAAAAwwGIAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAG4AAAAAAAAAAAAAAAQAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-05-15T13:00:18.375Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "Server.h",
-              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Server.h",
-              "RelativeDocumentMoniker": "Server.h",
-              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Server.h",
-              "RelativeToolTip": "Server.h",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-15T13:00:24.645Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ClientSession.cpp",
-              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\ClientSession.cpp",
-              "RelativeDocumentMoniker": "ClientSession.cpp",
-              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\ClientSession.cpp",
-              "RelativeToolTip": "ClientSession.cpp",
-              "ViewState": "AgIAABMAAAAAAAAAAAAAAB8AAABIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-15T12:35:24.349Z",
               "EditorCaption": ""
             },
             {
@@ -114,91 +74,68 @@
               "RelativeDocumentMoniker": "ClientSession.h",
               "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\ClientSession.h",
               "RelativeToolTip": "ClientSession.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAADAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-05-15T12:35:10.354Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "PacketProcessor.h",
-              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\PacketProcessor.h",
-              "RelativeDocumentMoniker": "PacketProcessor.h",
-              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\PacketProcessor.h",
-              "RelativeToolTip": "PacketProcessor.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-15T12:34:39.367Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Packet.h",
-              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Packet.h",
-              "RelativeDocumentMoniker": "Packet.h",
-              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Packet.h",
-              "RelativeToolTip": "Packet.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-15T12:33:49.065Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "main.cpp",
-              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\main.cpp",
-              "RelativeDocumentMoniker": "main.cpp",
-              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\main.cpp",
-              "RelativeToolTip": "main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-18T07:22:06.565Z"
             }
           ]
         },
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
+              "Title": "OverlappedData.h",
+              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\OverlappedData.h",
+              "RelativeDocumentMoniker": "OverlappedData.h",
+              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\OverlappedData.h",
+              "RelativeToolTip": "OverlappedData.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-28T16:24:09.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Server.h",
+              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Server.h",
+              "RelativeDocumentMoniker": "Server.h",
+              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\Server.h",
+              "RelativeToolTip": "Server.h",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2025-05-28T15:36:31.367Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ClientSession.cpp",
+              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\ClientSession.cpp",
+              "RelativeDocumentMoniker": "ClientSession.cpp",
+              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\ClientSession.cpp",
+              "RelativeToolTip": "ClientSession.cpp",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-05-28T15:08:49.149Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "PacketProcessor.cpp",
               "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\PacketProcessor.cpp",
               "RelativeDocumentMoniker": "PacketProcessor.cpp",
               "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\PacketProcessor.cpp",
               "RelativeToolTip": "PacketProcessor.cpp",
-              "ViewState": "AgIAAF8AAAAAAAAAAADgv3QAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-15T12:35:41.354Z",
+              "WhenOpened": "2025-05-28T15:03:41.344Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "function.cpp",
-              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\function.cpp",
-              "RelativeDocumentMoniker": "function.cpp",
-              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\function.cpp",
-              "RelativeToolTip": "function.cpp",
-              "ViewState": "AgIAACoAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2025-05-24T08:08:44.441Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "function.h",
-              "DocumentMoniker": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\function.h",
-              "RelativeDocumentMoniker": "function.h",
-              "ToolTip": "D:\\Unity\\2D_3Match_IOCP_Server\\IOCP_study\\function.h",
-              "RelativeToolTip": "function.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA1AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2025-05-24T08:07:24.813Z"
             }
           ]
         }

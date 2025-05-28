@@ -12,8 +12,6 @@ void ClientSession::PostRecv()
 
 	DWORD flags = 0;
 	DWORD recvBytes = 0;
-	//WSABUF buf = { sizeof(recvBuffer), recvBuffer };
-	//WSARecv(socket, &buf, 1, &recvBytes, &flags, &overlappedRecv, NULL);
 
 	int result = WSARecv(socket, &overlapped->buffer, 1, &recvBytes, &flags, &overlapped->overlapped, NULL);
 
@@ -42,8 +40,3 @@ SOCKET ClientSession::GetSocket() const
 {
 	return socket;
 }
-
-//const char* ClientSession::GetRecvBuffer() const
-//{
-//	return recvBuffer;
-//}

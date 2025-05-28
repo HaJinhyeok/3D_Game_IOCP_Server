@@ -71,7 +71,7 @@ void PrintBytes(const char* data, int len)
                     printf(".");
             }
         }
-
         printf("\n");
     }
+    printf("\n");
 }
