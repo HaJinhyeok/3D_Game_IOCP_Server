@@ -61,7 +61,7 @@ void PacketProcessor::HandleMatchRequest(std::shared_ptr<ClientSession> session)
 		player1->Send((char*)&packetToPlayer1, packetToPlayer1.header.size);
 		player2->Send((char*)&packetToPlayer2, packetToPlayer2.header.size);
 
-		IsMatching = true;
+		isMatching = true;
 
 		std::cout << "Players matched!\n";
 	}
@@ -87,7 +87,7 @@ void PacketProcessor::SendMessageToPlayer(std::shared_ptr<ClientSession> sender,
 	if (header->type == PacketType::PACKET_MATCH_EXIT)
 	{
 		// 매치 중에 나간 경우 상대방 승리
-		if (IsMatching)
+		if (isMatching)
 		{
 			const Packet* recvPacket = reinterpret_cast<const Packet*>(data);
 			Packet sendPacket = {};
@@ -105,7 +105,7 @@ void PacketProcessor::SendMessageToPlayer(std::shared_ptr<ClientSession> sender,
 			}
 			player1 = nullptr;
 			player2 = nullptr;
-			IsMatching = false;
+			isMatching = false;
 		}
 		else
 		{
@@ -163,7 +163,7 @@ void PacketProcessor::SendMessageToPlayer(std::shared_ptr<ClientSession> sender,
 				player2->Send((char*)&resultPacket, resultPacket.header.size);
 				std::cout << "Draw\n";
 			}
-			IsMatching = false;
+			isMatching = false;
 			player1 = nullptr;
 			player2 = nullptr;
 			score1 = NO_SCORE;

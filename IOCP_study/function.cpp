@@ -41,23 +41,8 @@ std::string BytesToString(const char* data, int len)
 
 void PrintBytes(const char* data, int len)
 {
-    //printf("Offset   Hexadecimal              ASCII\n");
-    //printf("-------- ------------------------ ----------------\n");
-
     for (int i = 0; i < len; i += 16) 
     {
-        //printf("%08X  ", i);
-
-        //// Hex 출력
-        //for (int j = 0; j < 16; ++j) 
-        //{
-        //    if (i + j < len)
-        //        printf("%02X ", (unsigned char)data[i + j]);
-        //    else
-        //        printf("   ");
-        //}
-
-        //printf(" ");
 
         // ASCII 출력
         for (int j = 0; j < 16; ++j) 

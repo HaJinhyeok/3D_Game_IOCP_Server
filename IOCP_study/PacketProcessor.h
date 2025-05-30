@@ -7,7 +7,7 @@
 static std::shared_ptr<ClientSession> waitingPlayer = nullptr;
 static std::shared_ptr<ClientSession> player1 = nullptr;
 static std::shared_ptr<ClientSession> player2 = nullptr;
-static bool IsMatching = false;
+static bool isMatching = false;
 static int score1 = NO_SCORE;
 static int score2 = NO_SCORE;
 

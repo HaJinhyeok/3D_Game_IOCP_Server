@@ -60,7 +60,7 @@ void Server::WorkerThreadLoop()
 		// 소켓 연결 끊어졌을 때
 		if (!result || bytesTransferred <= 0)
 		{
-			if (IsMatching)
+			if (isMatching)
 			{
 				std::shared_ptr<ClientSession> receiver = nullptr;
 
@@ -82,7 +82,7 @@ void Server::WorkerThreadLoop()
 
 				player1 = nullptr;
 				player2 = nullptr;
-				IsMatching = false;
+				isMatching = false;
 
 				std::cout << "Match Closed...\n";
 			}
